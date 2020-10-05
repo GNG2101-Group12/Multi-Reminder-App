@@ -3,11 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_marginHorizontal="30dp"
+    android:layout_marginVertical="10dp"
     android:background="#C7CEEA">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp" >
+        android:layout_height="45sp" >
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -16,25 +18,22 @@
             android:orientation="horizontal" >
 
             <CheckBox
-                android:layout_width="wrap_content"
+                android:layout_width="170sp"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/colorReminderUI"
-                android:id="@+id/enableReminder" />
-
-            <TextView
-                android:id="@+id/reminderText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="0dp"
                 android:text="Example Reminder Text"
-                android:textColor="@color/colorReminderUI" />
+                android:textSize="17sp"
+                android:maxLines="100"
+                android:id="@+id/enableReminder" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_gravity="center"
                 android:text="!!!"
+                android:textSize="17sp"
                 android:textColor="@color/colorReminderUI"
                 android:id="@+id/reminderPriority" />
 
@@ -72,7 +71,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginBottom="5dp" >
 
         <LinearLayout
             android:layout_width="wrap_content"
