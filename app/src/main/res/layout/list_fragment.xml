@@ -1,6 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <gng2101_2020.group12.multireminder.ui.main.ReminderPreviewElementView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:color="#FF9AA2"
+            custom:reminderText="Lorem Ipsum"
+            custom:priority="1"
+            custom:reminderTime="11:00 AM"
+            custom:delayTime="20 mins" />
+
+        <gng2101_2020.group12.multireminder.ui.main.ReminderPreviewElementView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:color="#B5EAD7"
+            custom:reminderText="Consectetur Adipiscing Rlit"
+            custom:priority="2"
+            custom:reminderTime="12:00 PM"
+            custom:delayTime="5 mins" />
+
+        <gng2101_2020.group12.multireminder.ui.main.ReminderPreviewElementView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:reminderText="Morbi" />
+
+        <gng2101_2020.group12.multireminder.ui.main.ReminderPreviewElementView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:color="#B5EAD7"
+            custom:reminderText="Adipiscing Rlit"
+            custom:priority="1"
+            custom:reminderTime="1:00 PM"
+            custom:delayTime="5 mins" />
+
+        <gng2101_2020.group12.multireminder.ui.main.ReminderPreviewElementView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:reminderText="Praesent Aliquam Vivamus"
+            custom:priority="2"
+            custom:reminderTime="2:30 PM"
+            custom:delayTime="2 mins" />
+
+        <gng2101_2020.group12.multireminder.ui.main.ReminderPreviewElementView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:color="#E2F0CB"
+            custom:reminderText="Vivamus Etiam "
+            custom:priority="3"
+            custom:reminderTime="3:30 PM"
+            custom:delayTime="5 mins" />
+
+        <gng2101_2020.group12.multireminder.ui.main.ReminderPreviewElementView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:color="#FF9AA2"
+            custom:reminderText="Pellentesque"
+            custom:priority="2"
+            custom:reminderTime="3:30 PM"
+            custom:delayTime="10 mins" />
+
+        <gng2101_2020.group12.multireminder.ui.main.ReminderPreviewElementView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:color="#FF9AA2"
+            custom:reminderText="Aenean Rlit"
+            custom:priority="3"
+            custom:reminderTime="3:30 PM"
+            custom:delayTime="10 mins" />
+
+    </LinearLayout>
+
+</ScrollView>
