@@ -2,5 +2,10 @@
 <resources>
     <declare-styleable name="ReminderPreviewElementView">
         <attr name="color" format="color" />
+
+        <attr name="reminderText" format="string" />
+        <attr name="priority" format="integer" />
+        <attr name="reminderTime" format="string" />
+        <attr name="delayTime" format="string" />
     </declare-styleable>
 </resources>
