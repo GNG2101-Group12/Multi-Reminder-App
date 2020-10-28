@@ -12,7 +12,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:hint="@string/TaskTitle"
-            android:theme="@style/AppTheme.AppBarOverlay"/>
+            android:theme="@style/AppTheme.AppBarOverlay"
+            android:minHeight="?actionBarSize"
+            android:padding="@dimen/appbar_padding"
+            android:inputType="textCapWords"
+            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -20,6 +24,7 @@
         android:id="@+id/Spinner01"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="50dp"
         android:entries="@array/Category"
         android:prompt="@string/ChooseCategory" />
     <LinearLayout
@@ -47,6 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/Frequency"
+        android:minHeight="50dp"
         android:prompt="@string/frequencySpinner" />
 
     <LinearLayout
