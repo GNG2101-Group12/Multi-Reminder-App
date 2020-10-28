@@ -8,15 +8,31 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:hint="@string/TaskTitle"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            android:minHeight="?actionBarSize"
-            android:padding="@dimen/appbar_padding"
-            android:inputType="textCapWords"
-            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/TaskTitle"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                android:minHeight="?actionBarSize"
+                android:padding="@dimen/appbar_padding"
+                android:inputType="textCapWords"
+                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_check_24"
+                android:layout_centerVertical="true"
+                android:background="?android:selectableItemBackground"
+                android:padding="10dp"
+                android:id="@+id/submitButton"
+                android:layout_alignParentEnd="true" />
+
+        </RelativeLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
