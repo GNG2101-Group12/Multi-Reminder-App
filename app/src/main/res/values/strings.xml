@@ -2,4 +2,27 @@
     <string name="app_name">Multi-Reminder</string>
     <string name="tab_text_1">List</string>
     <string name="tab_text_2">Calendar</string>
+    <string name="TaskTitle">Task Title</string>
+    <string-array name="Category">
+        <item>Medicine</item>
+        <item>Food</item>
+        <item>Travel</item>
+    </string-array>
+    <string name="ChooseCategory">Choose Category</string>
+    <string name="choose_time">Choose Time</string>
+    <string name="time_pm">PM</string>
+    <string-array name="Frequency">
+        <item>Weekly</item>
+        <item>Monthly</item>
+        <item>Yearly</item>
+    </string-array>
+    <string name="frequencySpinner">Frequency</string>
+    <string name="monday">M</string>
+    <string name="sunday">S</string>
+    <string name="tuesday">T</string>
+    <string name="wednesday">W</string>
+    <string name="friday">F</string>
+    <string name="snooze">Snooze</string>
+    <string name="enter_snooze_time">Enter Snooze Time</string>
+    <string name="num_of_snoozes"># of Snoozes</string>
 </resources>
