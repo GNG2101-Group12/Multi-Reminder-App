@@ -48,18 +48,25 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/reminder_time"
+            android:gravity="center_vertical"
+            android:paddingEnd="5dp"
+            android:textSize="15dp"
+            android:textColor="@color/colorDark"/>
+
         <EditText
             android:id="@+id/choose_time"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:inputType="time"
+            android:focusableInTouchMode="true"
+            android:cursorVisible="false"
+            android:focusable="false"
             android:hint="@string/choose_time"
             android:layout_marginRight="30dp"/>
-        <Button
-            android:id="@+id/time_pm"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/time_pm"/>
 
     </LinearLayout>
 
@@ -213,13 +220,18 @@
             android:gravity="center_vertical"
             android:textSize="15dp"
             android:textColor="@color/colorDark"/>
+
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:inputType="time"
-            android:hint="@string/enter_snooze_time"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="10dp"/>
+            android:focusableInTouchMode="true"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:hint="@string/snooze_duration"
+            android:id="@+id/snoozeDuration"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="10dp"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
