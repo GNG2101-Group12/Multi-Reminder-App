@@ -212,20 +212,19 @@
 
 <!--    Month Frequency-->
     <Spinner
-        android:id="@+id/DaySpinner"
+        android:id="@+id/MonthlyView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:drawSelectorOnTop="true"
         android:entries="@array/Days"
-        android:visibility="gone"/>
+        android:visibility="invisible"/>
 
 <!--    Yearly Frequency-->
     <LinearLayout
-
+        android:id="@+id/YearlyView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="invisible">
 
         <Spinner
             android:layout_width="fill_parent"
