@@ -4,7 +4,10 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -18,25 +21,73 @@ import java.util.function.Function;
 
 import gng2101_2020.group12.multireminder.Helpers;
 import gng2101_2020.group12.multireminder.R;
+import gng2101_2020.group12.multireminder.reminders.Reminder;
+import gng2101_2020.group12.multireminder.reminders.ReminderCreator;
 import gng2101_2020.group12.multireminder.ui.main.SectionsPagerAdapter;
 import mobi.upod.timedurationpicker.TimeDurationPicker;
 import mobi.upod.timedurationpicker.TimeDurationPickerDialog;
 
 public class CreateReminderActivity extends AppCompatActivity {
 
+    EditText taskTitle;
+    EditText chooseTime;
+    Spinner categorySpinner;
+
+    ReminderCreator reminderCreator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_reminder);
+
+        reminderCreator = new ReminderCreator(this);
+
+        taskTitle = findViewById(R.id.taskTitle);
+        chooseTime = findViewById(R.id.choose_time);
+        categorySpinner = findViewById(R.id.categorySpinner);
 
         EditText chooseTime = findViewById(R.id.choose_time);
         chooseTime.setOnClickListener((view) -> openTimePicker(view));
         chooseTime.setOnFocusChangeListener((view, b) -> {if (b) openTimePicker(view);});
 
         EditText snoozeDuration = findViewById(R.id.snoozeDuration);
-        //TODO: Fix this to actually be minutes
         snoozeDuration.setOnClickListener((view) -> openDurationPicker(view));
         snoozeDuration.setOnFocusChangeListener((view, b) -> {if (b) openDurationPicker(view);});
+
+        ImageButton submitButton = findViewById(R.id.submitButton);
+        submitButton.setOnClickListener((view) -> {
+            String[] chosenTime = chooseTime.getText().toString().split(":");
+            if (chosenTime.length != 2) {
+                Toast.makeText(this, "Time is invalid", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            int minute = 0;
+            int hour = 0;
+            try {
+                minute = Integer.parseInt(chosenTime[1]);
+                hour = Integer.parseInt(chosenTime[0]);
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, "Time is invalid", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.SECOND, 0);
+            calendar.set(Calendar.MINUTE, minute);
+            calendar.set(Calendar.HOUR, hour);
+
+            System.out.println(System.currentTimeMillis() - calendar.getTimeInMillis());
+//
+            // TODO: Implement repeating reminders
+//            calendar.add(Calendar.DAY_OF_MONTH, 1);
+
+            Reminder reminder = new Reminder(taskTitle.getText().toString(), categorySpinner.getSelectedItem().toString());
+            reminderCreator.scheduleReminder(calendar, reminder);
+
+            // TODO: save data somewhere persistent
+
+            finish();
+        });
     }
 
     public void openTimePicker(View view) {
