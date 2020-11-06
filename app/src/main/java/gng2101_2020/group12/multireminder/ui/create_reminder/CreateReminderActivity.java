@@ -74,7 +74,7 @@ public class CreateReminderActivity extends AppCompatActivity {
             Calendar calendar = Calendar.getInstance();
             calendar.set(Calendar.SECOND, 0);
             calendar.set(Calendar.MINUTE, minute);
-            calendar.set(Calendar.HOUR, hour);
+            calendar.set(Calendar.HOUR_OF_DAY, hour);
 
             System.out.println(System.currentTimeMillis() - calendar.getTimeInMillis());
 //
