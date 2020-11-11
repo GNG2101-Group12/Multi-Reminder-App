@@ -22,6 +22,7 @@
     <string name="tuesday">T</string>
     <string name="wednesday">W</string>
     <string name="friday">F</string>
+    <string name="complete">Complete</string>
     <string name="snooze">Snooze</string>
     <string name="snooze_duration">Snooze Duration</string>
     <string name="num_of_snoozes"># of Snoozes</string>
@@ -75,4 +76,10 @@
         <item>30</item>
         <item>31</item>
     </string-array>
+
+    <!--    Notifications    -->
+    <string name="low_priority_reminder">Low Priority Reminder</string>
+    <string name="medium_priority_reminder">Medium Priority Reminder</string>
+    <string name="high_priority_reminder">High Priority Reminder</string>
+
 </resources>

@@ -20,6 +20,7 @@
                 android:minHeight="?actionBarSize"
                 android:padding="@dimen/appbar_padding"
                 android:inputType="textCapWords"
+                android:id="@+id/taskTitle"
                 android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
 
             <ImageButton
@@ -37,7 +38,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <Spinner
-        android:id="@+id/Spinner01"
+        android:id="@+id/categorySpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="50dp"
