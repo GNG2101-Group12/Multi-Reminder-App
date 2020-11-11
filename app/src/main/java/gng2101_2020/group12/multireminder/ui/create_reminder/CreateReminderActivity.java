@@ -3,8 +3,10 @@ package gng2101_2020.group12.multireminder.ui.create_reminder;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -20,9 +22,11 @@ import java.util.Calendar;
 import java.util.function.Function;
 
 import gng2101_2020.group12.multireminder.Helpers;
+import gng2101_2020.group12.multireminder.MainActivity;
 import gng2101_2020.group12.multireminder.R;
 import gng2101_2020.group12.multireminder.reminders.Reminder;
 import gng2101_2020.group12.multireminder.reminders.ReminderCreator;
+import gng2101_2020.group12.multireminder.ui.main.DatabaseHandler;
 import gng2101_2020.group12.multireminder.ui.main.SectionsPagerAdapter;
 import mobi.upod.timedurationpicker.TimeDurationPicker;
 import mobi.upod.timedurationpicker.TimeDurationPickerDialog;
@@ -84,9 +88,48 @@ public class CreateReminderActivity extends AppCompatActivity {
             Reminder reminder = new Reminder(taskTitle.getText().toString(), categorySpinner.getSelectedItem().toString());
             reminderCreator.scheduleReminder(calendar, reminder);
 
-            // TODO: save data somewhere persistent
+            // Save Data in SQL Database
+            String item = categorySpinner.getSelectedItem().toString();
+            reminder.setCategory(item);
+            reminder.setReminderDelay(snoozeDuration.getText().toString());
+
+            DatabaseHandler dbHandler = new DatabaseHandler(this);
+            dbHandler.addReminder(reminder);
 
             finish();
+        });
+
+        Spinner spinner = (Spinner) findViewById(R.id.frequencySpinner);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item = (String) parent.getItemAtPosition(position);
+                LinearLayout weeklyLinearLayout = (LinearLayout) findViewById(R.id.WeeklyView);
+                Spinner monthlySpinner = (Spinner) findViewById(R.id.MonthlyView);
+                LinearLayout yearlyLinearLayout = (LinearLayout) findViewById(R.id.YearlyView);
+                switch (item) {
+                    case "Weekly":
+                        weeklyLinearLayout.setVisibility(View.VISIBLE);
+                        monthlySpinner.setVisibility(View.GONE);
+                        yearlyLinearLayout.setVisibility(View.GONE);
+                        break;
+                    case "Monthly":
+                        weeklyLinearLayout.setVisibility(View.GONE);
+                        monthlySpinner.setVisibility(View.VISIBLE);
+                        yearlyLinearLayout.setVisibility(View.GONE);
+                        break;
+                    case "Yearly":
+                        weeklyLinearLayout.setVisibility(View.GONE);
+                        monthlySpinner.setVisibility(View.GONE);
+                        yearlyLinearLayout.setVisibility(View.VISIBLE);
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
         });
     }
 

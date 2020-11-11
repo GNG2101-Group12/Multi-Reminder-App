@@ -83,7 +83,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/WeeklyView"
-        android:visibility="gone"
+        android:visibility="visible"
         android:orientation="horizontal"
         android:gravity="center_horizontal"
         android:layout_marginHorizontal="30dp">
@@ -217,7 +217,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:entries="@array/Days"
-        android:visibility="invisible"/>
+        android:visibility="gone"/>
 
 <!--    Yearly Frequency-->
     <LinearLayout
@@ -225,7 +225,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="invisible">
+        android:visibility="gone">
 
         <Spinner
             android:layout_width="fill_parent"

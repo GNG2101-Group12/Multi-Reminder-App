@@ -6,6 +6,8 @@ import android.os.Parcel;
 public class Reminder {
     private String name;
     private String category;
+    private String reminderTime;
+    private String reminderDelay;
 
     public Reminder(String name, String category) {
         this.name = name;
@@ -14,6 +16,10 @@ public class Reminder {
 
     protected Reminder(Bundle bundle) {
         this(bundle.getString("name"), bundle.getString("category"));
+    }
+
+    public Reminder() {
+
     }
 
     public String getName() {
@@ -30,6 +36,22 @@ public class Reminder {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getReminderTime() {
+        return reminderTime;
+    }
+
+    public void setReminderTime(String reminderTime) {
+        this.reminderTime = reminderTime;
+    }
+
+    public String getReminderDelay() {
+        return reminderDelay;
+    }
+
+    public void setReminderDelay(String reminderDelay) {
+        this.reminderDelay = reminderDelay;
     }
 
     public void write(Bundle bundle) {
