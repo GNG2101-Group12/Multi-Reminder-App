@@ -1,13 +1,66 @@
 package gng2101_2020.group12.multireminder.reminders;
 
 import android.os.Bundle;
-import android.os.Parcel;
 
 public class Reminder {
     private String name;
     private String category;
     private String reminderTime;
     private String reminderDelay;
+    private int numberOfSnoozes;
+    private int snoozesOccurred;
+    private boolean completed;
+    private String frequency;
+    private String frequencyParameters;
+    private int priority;
+
+    public int getNumberOfSnoozes() {
+        return numberOfSnoozes;
+    }
+
+    public void setNumberOfSnoozes(int numberOfSnoozes) {
+        this.numberOfSnoozes = numberOfSnoozes;
+    }
+
+    public int getSnoozesOccurred() {
+        return snoozesOccurred;
+    }
+
+    public void setSnoozesOccurred(int snoozesOccurred) {
+        this.snoozesOccurred = snoozesOccurred;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
+    public String getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
+    }
+
+    public String getFrequencyParameters() {
+        return frequencyParameters;
+    }
+
+    public void setFrequencyParameters(String frequencyParameters) {
+        this.frequencyParameters = frequencyParameters;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
 
     public Reminder(String name, String category) {
         this.name = name;
