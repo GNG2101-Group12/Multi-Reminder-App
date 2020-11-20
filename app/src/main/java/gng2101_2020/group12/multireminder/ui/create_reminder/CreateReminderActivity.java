@@ -3,27 +3,23 @@ package gng2101_2020.group12.multireminder.ui.create_reminder;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
 
 import java.util.Calendar;
-import java.util.function.Function;
 
 import gng2101_2020.group12.multireminder.Helpers;
 import gng2101_2020.group12.multireminder.R;
 import gng2101_2020.group12.multireminder.reminders.Reminder;
 import gng2101_2020.group12.multireminder.reminders.ReminderCreator;
-import gng2101_2020.group12.multireminder.ui.main.SectionsPagerAdapter;
+import gng2101_2020.group12.multireminder.ui.main.DatabaseHandler;
 import mobi.upod.timedurationpicker.TimeDurationPicker;
 import mobi.upod.timedurationpicker.TimeDurationPickerDialog;
 
@@ -32,6 +28,11 @@ public class CreateReminderActivity extends AppCompatActivity {
     EditText taskTitle;
     EditText chooseTime;
     Spinner categorySpinner;
+    EditText numberOfSnoozes;
+    Spinner frequencySpinner;
+    Spinner monthlyView;
+    Spinner listOfMonths;
+    Spinner yearlyDays;
 
     ReminderCreator reminderCreator;
 
@@ -45,6 +46,11 @@ public class CreateReminderActivity extends AppCompatActivity {
         taskTitle = findViewById(R.id.taskTitle);
         chooseTime = findViewById(R.id.choose_time);
         categorySpinner = findViewById(R.id.categorySpinner);
+        numberOfSnoozes = findViewById(R.id.numberOfSnoozes);
+        frequencySpinner = findViewById(R.id.frequencySpinner);
+        monthlyView = findViewById(R.id.MonthlyView);
+        listOfMonths = findViewById(R.id.listOfMonths);
+        yearlyDays = findViewById(R.id.yearlyDays);
 
         EditText chooseTime = findViewById(R.id.choose_time);
         chooseTime.setOnClickListener((view) -> openTimePicker(view));
@@ -84,9 +90,62 @@ public class CreateReminderActivity extends AppCompatActivity {
             Reminder reminder = new Reminder(taskTitle.getText().toString(), categorySpinner.getSelectedItem().toString());
             reminderCreator.scheduleReminder(calendar, reminder);
 
-            // TODO: save data somewhere persistent
+            // Save Data in SQL Database
+            String categoryItem = categorySpinner.getSelectedItem().toString();
+            String frequencyItem = frequencySpinner.getSelectedItem().toString();
+            reminder.setCategory(categoryItem);
+            reminder.setReminderTime(Helpers.formatDate(hour, minute));
+            reminder.setReminderDelay(snoozeDuration.getText().toString());
+            reminder.setNumberOfSnoozes(Integer.parseInt(numberOfSnoozes.getText().toString()));
+            reminder.setSnoozesOccurred(0);
+            reminder.setCompleted(false);
+            reminder.setFrequency(frequencyItem);
+            if (frequencyItem.equals("Weekly")) {
+                reminder.setFrequencyParameters("Set up way to enter days here");
+            } else if (frequencyItem.equals("Monthly")) {
+                reminder.setFrequencyParameters(monthlyView.getSelectedItem().toString());
+            } else {
+                reminder.setFrequencyParameters(listOfMonths.getSelectedItem().toString() + " " + yearlyDays.getSelectedItem().toString());
+            }
+            reminder.setPriority(0);
+
+            DatabaseHandler dbHandler = new DatabaseHandler(this);
+            dbHandler.addReminder(reminder);
 
             finish();
+        });
+
+        Spinner spinner = (Spinner) findViewById(R.id.frequencySpinner);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item = (String) parent.getItemAtPosition(position);
+                LinearLayout weeklyLinearLayout = (LinearLayout) findViewById(R.id.WeeklyView);
+                Spinner monthlySpinner = (Spinner) findViewById(R.id.MonthlyView);
+                LinearLayout yearlyLinearLayout = (LinearLayout) findViewById(R.id.YearlyView);
+                switch (item) {
+                    case "Weekly":
+                        weeklyLinearLayout.setVisibility(View.VISIBLE);
+                        monthlySpinner.setVisibility(View.GONE);
+                        yearlyLinearLayout.setVisibility(View.GONE);
+                        break;
+                    case "Monthly":
+                        weeklyLinearLayout.setVisibility(View.GONE);
+                        monthlySpinner.setVisibility(View.VISIBLE);
+                        yearlyLinearLayout.setVisibility(View.GONE);
+                        break;
+                    case "Yearly":
+                        weeklyLinearLayout.setVisibility(View.GONE);
+                        monthlySpinner.setVisibility(View.GONE);
+                        yearlyLinearLayout.setVisibility(View.VISIBLE);
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
         });
     }
 

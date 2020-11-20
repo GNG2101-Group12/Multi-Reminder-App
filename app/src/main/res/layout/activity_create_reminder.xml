@@ -83,7 +83,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/WeeklyView"
-        android:visibility="gone"
+        android:visibility="visible"
         android:orientation="horizontal"
         android:gravity="center_horizontal"
         android:layout_marginHorizontal="30dp">
@@ -217,7 +217,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:entries="@array/Days"
-        android:visibility="invisible"/>
+        android:visibility="gone"/>
 
 <!--    Yearly Frequency-->
     <LinearLayout
@@ -225,18 +225,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="invisible">
+        android:visibility="gone">
 
         <Spinner
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:entries="@array/Months"
-            />
+            android:id="@+id/listOfMonths"/>
 
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/Days"/>
+            android:entries="@array/Days"
+            android:id="@+id/yearlyDays"/>
     </LinearLayout>
 
 
@@ -269,7 +270,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:inputType="number"
-            android:hint="@string/num_of_snoozes"/>
+            android:hint="@string/num_of_snoozes"
+            android:id="@+id/numberOfSnoozes"/>
 
     </LinearLayout>
 
