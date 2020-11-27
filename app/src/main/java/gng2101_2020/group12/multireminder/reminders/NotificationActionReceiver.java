@@ -36,7 +36,10 @@ public class NotificationActionReceiver extends BroadcastReceiver {
                 int delayTime = (int) Helpers.getMillisDuration(reminder.getReminderDelay());
                 calendar.add(Calendar.MILLISECOND, delayTime);
 
+                reminder.increaseSnoozesOccurred();
+
                 reminderCreator.scheduleReminder(calendar, reminder);
+
                 break;
             default:
                 return;

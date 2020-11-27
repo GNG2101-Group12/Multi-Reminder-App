@@ -60,15 +60,19 @@ public class NotifyReceiver extends BroadcastReceiver {
                 context.getString(R.string.snooze), snoozePendingIntent)
                 .build();
 
-        Notification notification = new NotificationCompat.Builder(context, LOW_PRIORITY_REMINDER)
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, LOW_PRIORITY_REMINDER)
                 .setSmallIcon(R.drawable.ic_baseline_check_24)
                 .setContentTitle(reminder.getName())
                 .setContentText("Category: " + reminder.getCategory())
                 .setPriority(NotificationCompat.PRIORITY_LOW)
                 .addAction(complete)
-                .addAction(snooze)
-                .setOngoing(true)
-                .build();
+                .setOngoing(true);
+
+        if (reminder.getNumberOfSnoozes() > reminder.getSnoozesOccurred()) {
+            notificationBuilder.addAction(snooze);
+        }
+
+        Notification notification = notificationBuilder.build();
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         notificationManager.notify(notificationID, notification);

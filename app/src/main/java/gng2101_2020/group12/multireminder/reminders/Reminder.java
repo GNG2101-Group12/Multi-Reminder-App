@@ -30,6 +30,10 @@ public class Reminder {
         this.snoozesOccurred = snoozesOccurred;
     }
 
+    public void increaseSnoozesOccurred() {
+        this.snoozesOccurred++;
+    }
+
     public boolean isCompleted() {
         return completed;
     }
