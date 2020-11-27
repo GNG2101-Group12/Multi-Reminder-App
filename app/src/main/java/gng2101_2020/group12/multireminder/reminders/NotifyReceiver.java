@@ -40,14 +40,22 @@ public class NotifyReceiver extends BroadcastReceiver {
 
         createNotificationChannels();
 
-        Intent completeIntent = new Intent(context, MainActivity.class);
-        PendingIntent completePendingIntent = PendingIntent.getActivity(context, UUID.randomUUID().hashCode(), completeIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        int notificationID = UUID.randomUUID().hashCode();
+
+        Intent completeIntent = new Intent(context, NotificationActionReceiver.class);
+        completeIntent.putExtra("notificationID", notificationID);
+        completeIntent.putExtra("action", NotificationActionReceiver.COMPLETE);
+        completeIntent.putExtra("reminder", intent.getBundleExtra("reminder"));
+        PendingIntent completePendingIntent = PendingIntent.getBroadcast(context, UUID.randomUUID().hashCode(), completeIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Action complete = new NotificationCompat.Action.Builder(R.drawable.ic_baseline_timer_24,
                 context.getString(R.string.complete), completePendingIntent)
                 .build();
 
-        Intent snoozeIntent = new Intent(context, MainActivity.class);
-        PendingIntent snoozePendingIntent = PendingIntent.getActivity(context, UUID.randomUUID().hashCode(), snoozeIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent snoozeIntent = new Intent(context, NotificationActionReceiver.class);
+        snoozeIntent.putExtra("notificationID", notificationID);
+        snoozeIntent.putExtra("action", NotificationActionReceiver.SNOOZE);
+        snoozeIntent.putExtra("reminder", intent.getBundleExtra("reminder"));
+        PendingIntent snoozePendingIntent = PendingIntent.getBroadcast(context, UUID.randomUUID().hashCode(), snoozeIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Action snooze = new NotificationCompat.Action.Builder(R.drawable.ic_baseline_timer_24,
                 context.getString(R.string.snooze), snoozePendingIntent)
                 .build();
@@ -59,10 +67,11 @@ public class NotifyReceiver extends BroadcastReceiver {
                 .setPriority(NotificationCompat.PRIORITY_LOW)
                 .addAction(complete)
                 .addAction(snooze)
+                .setOngoing(true)
                 .build();
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-        notificationManager.notify(123, notification);
+        notificationManager.notify(notificationID, notification);
     }
 
     private void createNotificationChannels() {
