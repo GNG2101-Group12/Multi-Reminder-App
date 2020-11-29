@@ -30,6 +30,10 @@ public class Reminder {
         this.snoozesOccurred = snoozesOccurred;
     }
 
+    public void increaseSnoozesOccurred() {
+        this.snoozesOccurred++;
+    }
+
     public boolean isCompleted() {
         return completed;
     }
@@ -69,6 +73,15 @@ public class Reminder {
 
     protected Reminder(Bundle bundle) {
         this(bundle.getString("name"), bundle.getString("category"));
+
+        setReminderTime(bundle.getString("reminderTime"));
+        setReminderDelay(bundle.getString("reminderDelay"));
+        setNumberOfSnoozes(bundle.getInt("numberOfSnoozes"));
+        setSnoozesOccurred(bundle.getInt("snoozesOccurred"));
+        setCompleted(bundle.getBoolean("completed"));
+        setFrequency(bundle.getString("frequency"));
+        setFrequencyParameters(bundle.getString("frequencyParameters"));
+        setPriority(bundle.getInt("priority"));
     }
 
     public Reminder() {
@@ -110,5 +123,13 @@ public class Reminder {
     public void write(Bundle bundle) {
         bundle.putString("name", name);
         bundle.putString("category", category);
+        bundle.putString("reminderTime", reminderTime);
+        bundle.putString("reminderDelay", reminderDelay);
+        bundle.putInt("numberOfSnoozes", numberOfSnoozes);
+        bundle.putInt("snoozesOccurred", snoozesOccurred);
+        bundle.putBoolean("completed", completed);
+        bundle.putString("frequency", frequency);
+        bundle.putString("frequencyParameters", frequencyParameters);
+        bundle.putInt("priority", priority);
     }
 }
