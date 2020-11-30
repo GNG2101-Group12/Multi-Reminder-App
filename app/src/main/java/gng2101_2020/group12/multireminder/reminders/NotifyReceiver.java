@@ -64,7 +64,7 @@ public class NotifyReceiver extends BroadcastReceiver {
                 .setSmallIcon(R.drawable.ic_baseline_check_24)
                 .setContentTitle(reminder.getName())
                 .setContentText("Category: " + reminder.getCategory())
-                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
                 .addAction(complete)
                 .setOngoing(true);
 
