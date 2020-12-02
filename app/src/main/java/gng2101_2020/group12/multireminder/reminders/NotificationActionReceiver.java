@@ -4,15 +4,17 @@ import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 import java.util.Calendar;
 
+import gng2101_2020.group12.multireminder.ActiveReminderHolder;
 import gng2101_2020.group12.multireminder.Helpers;
 
 public class NotificationActionReceiver extends BroadcastReceiver {
 
-    public static int COMPLETE = 0;
-    public static int SNOOZE = 1;
+    public static final int COMPLETE = 0;
+    public static final int SNOOZE = 1;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -25,12 +27,24 @@ public class NotificationActionReceiver extends BroadcastReceiver {
 
         ReminderCreator reminderCreator = new ReminderCreator(context);
 
+        // Trigger NotifyReceiver for next notification in the queue
+        if (!ActiveReminderHolder.reminderQueue.isEmpty()) {
+            Reminder nextReminder = ActiveReminderHolder.reminderQueue.remove();
+
+            Intent nextReminderIntent = new Intent(context, NotifyReceiver.class);
+            Bundle bundle = new Bundle();
+            nextReminder.write(bundle);
+            nextReminderIntent.putExtra("reminder", bundle);
+
+            context.sendBroadcast(nextReminderIntent);
+        }
+
         switch (intent.getIntExtra("action", -1)) {
-            case 0:
+            case COMPLETE:
                 // TODO: Clear if from the DB
 
                 break;
-            case 1:
+            case SNOOZE:
                 // Send a new reminder delayed by the correct amount
                 Calendar calendar = Calendar.getInstance();
                 int delayTime = (int) Helpers.getMillisDuration(reminder.getReminderDelay());

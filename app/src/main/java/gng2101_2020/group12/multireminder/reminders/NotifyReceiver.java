@@ -9,7 +9,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.IBinder;
+import android.service.notification.StatusBarNotification;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -18,6 +20,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 import java.util.UUID;
 
+import gng2101_2020.group12.multireminder.ActiveReminderHolder;
 import gng2101_2020.group12.multireminder.MainActivity;
 import gng2101_2020.group12.multireminder.R;
 
@@ -34,9 +37,19 @@ public class NotifyReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         this.context = context;
 
-        reminder = new Reminder(intent.getBundleExtra("reminder"));
-        System.out.println(reminder);
-        if (reminder == null) return;
+        Bundle reminderData = intent.getBundleExtra("reminder");
+        if (reminderData == null) return;
+
+        reminder = new Reminder(reminderData);
+
+
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        StatusBarNotification[] activeNotifications = notificationManager.getActiveNotifications();
+        if (activeNotifications.length > 0) {
+            // Add this reminder to the queue so it can be shown next
+            ActiveReminderHolder.reminderQueue.add(reminder);
+            return;
+        }
 
         createNotificationChannels();
 
@@ -74,8 +87,8 @@ public class NotifyReceiver extends BroadcastReceiver {
 
         Notification notification = notificationBuilder.build();
 
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-        notificationManager.notify(notificationID, notification);
+        NotificationManagerCompat notificationCompatManager = NotificationManagerCompat.from(context);
+        notificationCompatManager.notify(notificationID, notification);
     }
 
     private void createNotificationChannels() {
