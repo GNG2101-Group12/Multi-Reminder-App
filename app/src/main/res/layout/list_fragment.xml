@@ -8,7 +8,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:id="@+id/reminderlist">
 
         <gng2101_2020.group12.multireminder.ui.main.ReminderPreviewElementView
             android:layout_width="wrap_content"
@@ -76,6 +77,14 @@
             custom:priority="3"
             custom:reminderTime="3:30 PM"
             custom:delayTime="10 mins" />
+
+        <ListView
+            android:id="@+id/listView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true" >
+        </ListView>
 
     </LinearLayout>
 
